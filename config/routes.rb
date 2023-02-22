@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'items/index'
+    get 'items/new'
+    get 'items/show'
+    get 'items/edit'
+  end
   # get 'genres/index'
   # get 'genres/edit'
   devise_for :customers, controllers: {
@@ -13,6 +19,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :genres, only: [:index, :create, :edit, :update]
+    resources :items, only: [:index, :new, :show, :create, :edit, :update]
   end
 
   # root to: ""

@@ -1,0 +1,6 @@
+<%= form_with model: [:admin, @genre] do |f| %>
+
+<div>
+  <%= f.label :image, "商品画像" %>
+  <%= f.file_field :image, accept: "image/*" %><br>
+</div>
