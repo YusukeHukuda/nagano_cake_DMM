@@ -1,6 +1,27 @@
-<%= form_with model: [:admin, @genre] do |f| %>
+<%= form_with model: [:admin, @item] do |f| %>
 
 <div>
   <%= f.label :image, "商品画像" %>
   <%= f.file_field :image, accept: "image/*" %><br>
+
+  <%= f.label :name, "商品名" %>
+  <%= f.text_field :name, placeholder: "商品名" %><br>
+
+  <%= f.label :introduction, "商品説明" %>
+  <%= f.text_area :introduction, placeholder: "ここに説明文を記述します" %><br>
+
+  <%= f.label :genre_id, "ジャンル" %>
+  <%= f.collection_select :genre_id, @genres, :id, :name, {include_blank: '--選択してください--'} %><br>
+
+  <%= f.label :price, "税抜き価格" %>
+  <%= f.text_field :price, placeholder: "1000" %>円<br>
+
+  <%= f.label :is_active, "販売ステータス" %>
+  <%= f.radio_button :is_active, :true %>
+  <%= f.label :item, "販売中" %>
+  <%= f.radio_button :item, :false %>
+  <%= f.label :item, "販売停止中" %><br>
+
+  <%= f.submit '新規登録' %>
 </div>
+<% end %>
