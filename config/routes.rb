@@ -1,16 +1,4 @@
 Rails.application.routes.draw do
-
-  namespace :admin do
-    get 'customers/index'
-    get 'customers/show'
-    get 'customers/edit'
-  end
-  namespace :admin do
-    get 'items/index'
-    get 'items/new'
-    get 'items/show'
-    get 'items/edit'
-  end
   # get 'genres/index'
   # get 'genres/edit'
   devise_for :customers, controllers: {
@@ -21,6 +9,8 @@ Rails.application.routes.draw do
   devise_for :admin, controllers: {
   sessions: "admin/sessions"
   }
+
+  get 'admin', to: 'admin/home#top'
 
   namespace :admin do
     resources :genres, only: [:index, :create, :edit, :update]
