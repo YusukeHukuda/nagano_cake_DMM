@@ -1,10 +1,23 @@
 Rails.application.routes.draw do
-  # get 'genres/index'
-  # get 'genres/edit'
+
   devise_for :customers, controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
   }
+
+  root to: 'public/homes#top'
+  get 'about', to: 'public/homes#about'
+
+
+  get '/customers' => "public/customers#show"
+  get '/customers/information/edit' => "customers#edit"
+  get 'customers/unsubscribe'
+  patch '/customers/information' => "customers#update"
+
+  namespace :public do
+  end
+  # get 'genres/index'
+  # get 'genres/edit'
 
   devise_for :admin, controllers: {
   sessions: "admin/sessions"
