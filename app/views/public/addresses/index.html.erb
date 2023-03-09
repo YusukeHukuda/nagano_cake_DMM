@@ -1,0 +1,47 @@
+<h5>配送先登録/一覧</h5>
+<%= form_with model: @address do |f| %>
+  <div>
+    <%= f.label :"郵便番号（ハイフンなし)" %>
+    <%= f.text_field :postal_code, placeholder: "0000000" %>
+  </div>
+
+  <div>
+    <%= f.label :住所 %>
+    <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0" %>
+  </div>
+
+  <div>
+    <%= f.label :宛名 %>
+    <%= f.text_field :name, placeholder: "令和道子" %>
+  </div>
+
+  <div>
+    <%= f.submit "新規登録" %>
+  </div>
+
+  <% end %>
+
+  <table>
+  <thead>
+    <tr>
+      <th>郵便番号</th>
+      <th>住所</th>
+      <th>宛名</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= @addresses.each do |address| %>
+    <tr>
+      <td><%= address.postal_code %></td>
+
+      <td><%= address.address %></td>
+      <td><%= address.name %></td>
+      <td><%= link_to "編集する", edit_address_path, class: "btn btn-success" %></td>
+      <td><%= link_to "削除する", addresses_path, class: "btn btn-danger" %></td>
+
+    <% end %>
+    </tr>
+  </tbody>
+</table>

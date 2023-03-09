@@ -1,0 +1,19 @@
+<div>
+  <p>ジャンル検索</p>
+  <% @genres.each do |genre| %>
+    <%= genre.name %>
+  <% end %>
+</div>
+
+<h5>商品一覧<p>(全<%= @items.count %>件)</p></h5>
+
+  <% @items.each do |item| %>
+    <%= link_to item_path(item.id) do %>
+    <%= image_tag item.get_image(200,150) %>
+    <% end %><br>
+    <%= item.name %><br>
+    ¥<%= item.price.to_s(:delimited) %><br>
+  <% end %>
+<div>
+  <%= paginate @items %>
+</div>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  
   devise_for :customers, controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   get 'customers/unsubscribe'
   patch '/customers/information' => "customers#update"
 
-  namespace :public do
+  scope module: :public do
+  resources :addresses, only: [:index, :create, :edit, :update, :destroy]
+  resources :items, only: [:index, :show]
   end
   # get 'genres/index'
   # get 'genres/edit'
