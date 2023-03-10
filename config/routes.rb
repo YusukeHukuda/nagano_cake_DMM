@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   scope module: :public do
   resources :addresses, only: [:index, :create, :edit, :update, :destroy]
   resources :items, only: [:index, :show]
+  resources :cart_items, only: [:index, :update, :destroy, :create]
   end
   # get 'genres/index'
   # get 'genres/edit'
