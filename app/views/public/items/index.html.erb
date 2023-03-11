@@ -1,19 +1,23 @@
-<div>
-  <p>ジャンル検索</p>
-  <% @genres.each do |genre| %>
-    <%= genre.name %>
-  <% end %>
+<div class="row ms-4 py-3 ml-3"
+     style="height: 800px">
+  <div class="col py-3 mx-3 justify-content-center">
+    <h3>商品一覧(全<%= @all_items.count %>件)</h3>
+    <table class="table table-borderless">
+      <tr class="d-flex">
+        <% @items.each do |item| %>
+          <td class="new_item_table">
+            <%= link_to item_path(item.id) do %>
+              <%= image_tag item.get_image(200,150), class: "new_item_image"  %>
+              <p class="figure-caption"><%= item.name %></p>
+              <p class="figure-caption">¥<%= item.with_tax_price %></p>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    </table>
+  </div>
 </div>
 
-<h5>商品一覧<p>(全<%= @items.count %>件)</p></h5>
-
-  <% @items.each do |item| %>
-    <%= link_to item_path(item.id) do %>
-    <%= image_tag item.get_image(200,150) %>
-    <% end %><br>
-    <%= item.name %><br>
-    ¥<%= item.price.to_s(:delimited) %><br>
-  <% end %>
-<div>
+<div class="col text-right">
   <%= paginate @items %>
 </div>
