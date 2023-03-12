@@ -9,7 +9,7 @@
   <div class="row mt-4">
     <div class="col-xl-1"></div>
     <h5 class="col-xl-2 text-center">登録情報</h5>
-    <div class="col-xl-2 text-center"><%= link_to "編集する", public_customers_information_edit_path, class: "btn btn-success", style: "width:140px" %></div>
+    <div class="col-xl-2 text-center"><%= link_to "編集する", customers_information_edit_path, class: "btn btn-success", style: "width:140px" %></div>
   </div>
   <div class="row pt-3">
     <div class="col-xl-1"></div>
@@ -18,11 +18,11 @@
         <tbody>
           <tr>
             <td>氏名</td>
-            <td><%= @customer.full_name %></td>
+            <td><%= @customer.last_name %><%= @customer.first_name %></td>
           </tr>
           <tr>
             <td>カナ</td>
-            <td><%= @customer.full_name_kana %></td>
+            <td><%= @customer.last_name_kana %><%= @customer.first_name_kana %></td>
           </tr>
           <tr>
             <td>郵便番号</td>
@@ -34,7 +34,7 @@
           </tr>
           <tr>
             <td>電話番号</td>
-            <td><%= @customer.phone_number %></td>
+            <td><%= @customer.telephone_number %></td>
           </tr>
           <tr>
             <td>メールアドレス</td>
@@ -48,11 +48,11 @@
   <div class="row">
     <div class="col-xl-1"></div>
     <h5 class="col-xl-2 mt-4 text-center">配送先</h5>
-    <div class="col-xl-2 mt-4 text-center"><%= link_to "一覧を見る", public_addresses_path, class: "btn btn-primary", style: "width:140px" %></div>
+    <div class="col-xl-2 mt-4 text-center"><%= link_to "一覧を見る", addresses_path, class: "btn btn-primary", style: "width:140px" %></div>
   </div>
   <div class="row">
     <div class="col-xl-1"></div>
     <h5 class="col-xl-2 mt-4 text-center">注文履歴</h5>
-    <div class="col-xl-2 mt-4 text-center"><%= link_to "一覧を見る", public_orders_path, class: "btn btn-primary", style: "width:140px" %></div>
+    <div class="col-xl-2 mt-4 text-center"><%= link_to "一覧を見る", orders_path, class: "btn btn-primary", style: "width:140px" %></div>
   </div>
 </div>
