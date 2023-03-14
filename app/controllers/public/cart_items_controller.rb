@@ -30,22 +30,11 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
-    @cart_item = current_customer.cart_items.new(cart_item_params)
-    @cart_items = current_customer.cart_items.all
-    @cart_items.each do |cart_item|
-      if @cart_item.item_id == cart_item.item_id
-        if @cart_item.amount.present?
-          cart_item.update(amount: @cart_item.amount + cart_item.amount)
-          @cart_item.delete
-        end
-      end
-    end
-    if @cart_item.amount.present?
-      @cart_item.save
-      redirect_to public_cart_items_path
+    if current_customer.cart_items.find_by(item_id: prams[:cart_item][:item_id]).present?
+      @cart_item.update(amount: @cart_item.amount + cart_item.amount)
     else
-      flash[:select_alert] = "※商品の個数を選択してください"
-      redirect_to public_item_path(@cart_item.item)
+      @cart_item = CartItem.new(params_cart_item)
+      @cart_item.save
     end
   end
 
