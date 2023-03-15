@@ -1,7 +1,9 @@
 class Item < ApplicationRecord
   has_one_attached :image
+  has_many :cart_item, dependent: :destroy
+  has_many :order_item, dependent: :destroy
   belongs_to :genre
-  
+
 def with_tax_price
   (price * 1.1).floor
 end
@@ -9,7 +11,7 @@ end
 def subtotal
     item.with_tax_price * amount
 end
-  
+
   def get_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -17,5 +19,5 @@ end
     end
     image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
 end
