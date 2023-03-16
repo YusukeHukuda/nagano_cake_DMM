@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   devise_for :customers, controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   scope module: :public do
   resources :addresses, only: [:index, :create, :edit, :update, :destroy]
   resources :items, only: [:index, :show]
+  delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
   resources :cart_items, only: [:index, :update, :destroy, :create]
   end
   # get 'genres/index'

@@ -11,8 +11,9 @@
         <span class="h3 font-weight-bold">¥<%= @item.with_tax_price %></span>(税込)
       </p>
       <div class="row justify-content-around item-form">
-        <%= form_with model: @cart_item, url: cart_items_path, method: :post, class:"mt-3" do |f| %>
+        <%= form_with model: @cart_item, url: cart_items_path, class:"mt-3" do |f| %>
           <%= f.hidden_field :item_id, :value => @item.id %>
+          <%= f.hidden_field :customer_id, :value => @customer.id %>
           <% if customer_signed_in? %>
             <p id="select_alert" class="text-danger font-weight-bold"><%= flash[:select_alert] %></p>
             <div class="d-flex">

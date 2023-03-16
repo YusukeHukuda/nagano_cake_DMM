@@ -1,5 +1,5 @@
 <h5>ショッピングカート</h5>
-<%= link_to "カートを空にする", destroy_all_public_cart_items_path, class: 'btn btn-danger', method: :delete %>
+<%= link_to "カートを空にする", cart_items_destroy_all_path, class: 'btn btn-danger', method: :delete %>
 
  <table>
   <thead>
@@ -13,25 +13,22 @@
   </thead>
 
   <tbody>
-    <% @cart_item.each do |cart_item| %>
+    <% @cart_items.each do |cart_item| %>
     <tr>
-      <th>
-        <%= image_tag cart_item.item.get_image, size: "50x50" %>
+      <td>
+        <%= image_tag cart_item.item.get_image(50,50) %>
         <%= cart_item.item.name %>
-      </th>
-      <th><%= cart_item.item.with_tax_price %></th>
-      <th>
-        <%= form_with model: cart_item, url: cart_item_path(cart_item) do |f| %>
-          <% if cart_item.amount < 10 %>
-            <%= f.select :amount, *[1..10], include_blank: cart_item.amount %>
-          <% else %>
-            <%= f.text_field :amount, class: "form-control-sm", include_blank: cart_item.amount, type: "number" %>
-          <% end %>
+      </td>
+      <td><%= cart_item.item.with_tax_price %></td>
+      <td>
+        <%= form_with model: cart_item, url: cart_item_path(cart_item), method: :patch do |f| %>
+        <%= f.select :amount, *[1..20] %>
+        <%= f.submit "変更" %>
         <% end %>
-        <th><%= cart_item.subtotal %></th>
-      </th>
+      </td>
       <td><%= link_to "削除する", method: :delete, class: "btn btn-danger" %></td>
     </tr>
+  <% end %>
   </tbody>
   </table>
 
