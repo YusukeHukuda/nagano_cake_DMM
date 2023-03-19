@@ -16,7 +16,7 @@
           <div class="ml-4 mb-2">
             〒<%= current_customer.postal_code %>
             <%= current_customer.address %><br>
-            <%= current_customer.full_name %>
+            <%= current_customer.last_name %><%= current_customer.first_name %>
           </div>
           <% if current_customer.addresses.present? %>
             <%= f.radio_button :address_option, 1 %>

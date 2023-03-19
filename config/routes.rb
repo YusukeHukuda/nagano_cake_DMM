@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   post '/orders/confirmation' => 'orders#confirmation', as: 'confirmation'
   get '/orders/thanks' => 'orders#thanks', as: 'thanks'
   resources :orders, only: [:new, :create, :index, :show]
+  resources :addresses, only: [:create, :index, :edit, :update]
 
   end
   # get 'genres/index'

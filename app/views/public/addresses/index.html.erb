@@ -38,7 +38,7 @@
 
       <td><%= address.address %></td>
       <td><%= address.name %></td>
-      <td><%= link_to "編集する", edit_address_path, class: "btn btn-success" %></td>
+      <td><%= link_to "編集する", edit_address_path(address.id), class: "btn btn-success" %></td>
       <td><%= link_to "削除する", addresses_path, class: "btn btn-danger" %></td>
 
     <% end %>
