@@ -1,24 +1,49 @@
-<div>
-  <p>ジャンル検索</p>
-  <% @genres.each do |genre| %>
-    <%= genre.name %>
-  <% end %>
-</div>
+<div class="container-fluid mt-5"
+     style="height: 800px">
+  <div class="row d-flex justify-content-center mx-auto">
+    <div class="col-2 border border-dark"
+         style="height: 300px">
+      <p>ジャンル検索</p>
+      <% @genres.each do |genre| %>
+        <%= genre.name %>
+      <% end %>
 
-<div class="main-visual">
-  <p class="main-visual-text">
-    ようこそ、ながのCAKEへ！<br>
-    このサイトは、ケーキ販売のECサイトになります。<br>
-    会員でない方も商品の閲覧はできますが、<br>
-    購入には会員登録が必要になります。
-  </p>
-</div>
-
-<div>
-  <h2>新着商品</h2>
-  <% @items.each do |item| %>
-    <%= image_tag item.get_image(200,150), class: "new_item_image" %><br>
-    <%= item.name %><br>
-    ¥<%= item.price.to_s(:delimited) %><br>
-  <% end %>
+    </div>
+    <div class="col-6  ms-5"
+         style="height: 700px">
+      <div class="col border border-dark"
+           style="padding-bottom: 50px">
+        <div class="col-6 mx-auto border border-dark"
+             style="margin-top: 50px;
+                    padding-top: 35px;
+                    height: 250px;">
+          <p class="margin-top: 50px">
+            ようこそ、ながのCAKEへ！<br>
+            このサイトは、ケーキ販売のECサイトになります。<br>
+            会員でない方も商品の閲覧はできますが、<br>
+            購入には会員登録が必要になります。
+          </p>
+        </div>
+      </div>
+      <div class="row py-3 mx-3 mt-5 justify-content-center">
+        <h2>新着商品</h2>
+        <table class="table table-borderless">
+          <tr class="d-flex d-block flex-wrap">
+            <% @items.each do |item| %>
+              <td class="new_item_table">
+                <%= link_to item_path(item) do %>
+                  <%= image_tag item.get_image(200,150), class: "new_item_image"  %>
+                  <p class="figure-caption"><%= item.name %></p>
+                  <p class="figure-caption">¥<%= item.with_tax_price %></p>
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+        </table>
+      </div>
+      <div class="col text-end">
+        <%= link_to "全ての商品を見る>", items_path %>
+      </div>
+    </div>
+  </div>
 </div>
