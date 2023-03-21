@@ -10,9 +10,11 @@ Rails.application.routes.draw do
 
 
   get '/customers' => "public/customers#show"
-  get '/customers/information/edit' => "customers#edit"
-  get 'customers/unsubscribe'
-  patch '/customers/information' => "customers#update"
+  get '/customers/information/edit' => "public/customers#edit"
+
+  patch '/customers/information' => "public/customers#update"
+  get '/customers/unsubscribe' => 'public/customers#unsubscribe'
+  patch '/customers/withdraw' => 'public/customers#withdraw', as: 'withdraw'
 
   scope module: :public do
   resources :addresses, only: [:index, :create, :edit, :update, :destroy]
