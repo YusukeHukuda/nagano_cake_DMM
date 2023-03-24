@@ -8,7 +8,7 @@ class Public::AddressesController < ApplicationController
     @address = Address.new(address_params)
     if @address.customer_id = current_customer.id
     @address.save
-    redirect_to addresses_path
+    redirect_to addresses_path, notice: "配送先の登録に成功しました"
     else
     render :index
     end
@@ -28,10 +28,16 @@ class Public::AddressesController < ApplicationController
     end
   end
 
+  def destroy
+    @address = Address.find(params[:id])
+    @address.delete
+    redirect_to addresses_path, notice: "配送先の削除に成功しました"
+  end
+
 
   private
 
   def address_params
-    params.require(:address).permit(:name, :postal_code, :address).merge(customer_id: current_customer.id)
+    params.require(:address).permit(:postal_code, :address, :name, :customer_id)
   end
 end

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   patch '/customers/information' => "public/customers#update"
   get '/customers/unsubscribe' => 'public/customers#unsubscribe'
-  patch '/customers/withdraw' => 'public/customers#withdraw', as: 'withdraw'
+  patch '/customers/withdraw' => 'public/customers#withdraw'
 
   scope module: :public do
   resources :addresses, only: [:index, :create, :edit, :update, :destroy]
@@ -25,7 +25,6 @@ Rails.application.routes.draw do
   post '/orders/confirmation' => 'orders#confirmation', as: 'confirmation'
   get '/orders/thanks' => 'orders#thanks', as: 'thanks'
   resources :orders, only: [:new, :create, :index, :show]
-  resources :addresses, only: [:create, :index, :edit, :update]
 
   end
   # get 'genres/index'

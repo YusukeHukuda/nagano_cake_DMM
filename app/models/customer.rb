@@ -11,10 +11,11 @@ class Customer < ApplicationRecord
 
   has_many :orders, dependent: :destroy
   has_many :cart_items, dependent: :destroy
-  has_many :address, dependent: :destroy
+  has_many :addresses, dependent: :destroy
 
   validates :postal_code, length: { is: 7}
   validates :telephone_number, length: { minimum: 10, maximum: 15 }
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :address, presence: true

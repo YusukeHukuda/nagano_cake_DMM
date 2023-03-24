@@ -20,6 +20,10 @@ class Public::CustomersController < ApplicationController
   end
 
   def unsubscribe
+
+  end
+
+  def withdraw
     @customer = current_customer
     @customer.is_deleted = true
     @customer.save

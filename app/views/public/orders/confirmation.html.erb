@@ -15,7 +15,7 @@
           <% @cart_items.each do |cart_item| %>
           <tr>
             <td class="align-middle">
-              <%= image_tag cart_item.item.get_image, size: "50x50" %>
+              <%= image_tag cart_item.item.get_image(50,50) %>
               <%= cart_item.item.name %>
             </td>
             <td class="align-middle"><%= cart_item.item.with_tax_price %></td>
@@ -38,7 +38,7 @@
           </tr>
           <tr>
             <th>請求金額</th>
-            <td><%= @order.total_payment + @order.postage %></td>
+            <td><%= @order.payment + @order.postage %></td>
           </tr>
         </table>
       </div>
@@ -57,7 +57,7 @@
     </div>
     <div class="row">
       <div class="mx-auto">
-        <%= form_with model: @order, url: public_orders_complete_path, method: :post do |f| %>
+        <%= form_with model: @order, url: thanks_path, method: :post do |f| %>
           <%= f.hidden_field :customer_id %>
           <%= f.hidden_field :postage %>
           <%= f.hidden_field :status %>

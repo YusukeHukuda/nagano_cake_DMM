@@ -9,7 +9,7 @@ class Public::OrdersController < ApplicationController
   def confirmation
     @order = Order.new(order_params)
     if params[:order][:address_option] == "0"
-      @order.name = current_customer.full_name
+      @order.name = current_customer.last_name + current_customer.first_name
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
 
@@ -30,11 +30,11 @@ class Public::OrdersController < ApplicationController
 
     @cart_items = current_customer.cart_items.all
     @order.postage = 800
-    @total_payment = 0
+    # @total_payment =
     @cart_items.each do |cart_item|
-      @total_payment = @total_payment + cart_item.item.with_tax_price * cart_item.amount
+      @total_payment = cart_item.item.with_tax_price * cart_item.amount
     end
-    @order.total_payment = @total_payment
+    @order.payment = @total_payment
     @order.customer_id = current_customer.id
   end
 
@@ -56,7 +56,7 @@ class Public::OrdersController < ApplicationController
     end
 
     current_customer.cart_items.destroy_all
-    redirect_to public_orders_complete_path, notice: "注文が完了しました"
+    redirect_to orders_thanks_path, notice: "注文が完了しました"
   end
 
   def index
