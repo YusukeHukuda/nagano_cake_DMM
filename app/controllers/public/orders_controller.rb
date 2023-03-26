@@ -47,16 +47,16 @@ class Public::OrdersController < ApplicationController
     @order.save
 
     current_customer.cart_items.each do |cart_item|
-      @order_detail = OrderDetail.new
-      @order_detail.item_id = cart_item.item_id
-      @order_detail.amount = cart_item.amount
-      @order_detail.price = cart_item.item.with_tax_price
-      @order_detail.order_id = @order.id
-      @order_detail.save
+      @order_items = OrderItem.new
+      @order_items.item_id = cart_item.item_id
+      @order_items.amount = cart_item.amount
+      @order_items.price_tax = cart_item.item.with_tax_price
+      @order_items.order_id = @order.id
+      @order_items.save
     end
 
     current_customer.cart_items.destroy_all
-    redirect_to orders_thanks_path, notice: "注文が完了しました"
+    redirect_to thanks_path, notice: "注文が完了しました"
   end
 
   def index
@@ -74,6 +74,6 @@ class Public::OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:payment_method, :postal_code, :name, :address, :customer_id, :status, :total_payment, :postage)
+    params.require(:order).permit(:payment_method, :postal_code, :name, :address, :customer_id, :status, :payment, :postage)
   end
 end

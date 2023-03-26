@@ -32,7 +32,7 @@
           <table class="table table-bordered">
             <tr>
               <td>商品合計</td>
-              <td><%= @order.total_payment %></td>
+              <td><%= @order.payment %></td>
             </tr>
             <tr>
               <td>配送料</td>
@@ -40,7 +40,7 @@
             </tr>
             <tr>
               <td>ご請求金額</td>
-              <td><%= @order.total_payment + @order.postage %></td>
+              <td><%= @order.payment + @order.postage %></td>
             </tr>
           </table>
         </div>
@@ -56,7 +56,7 @@
                 <th>個数</th>
                 <th>小計</th>
               </tr>
-              <% @order.order_detail.each do |order| %>
+              <% @order.order_items.each do |order| %>
                 <tr>
                   <td><%= order.item.name %></td>
                   <td><%= order.price %></td>
