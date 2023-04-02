@@ -64,16 +64,12 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-    @params = params[:check]
-    if @params
       @order = Order.find(params[:id])
-    else
-      redirect_to root_path, alert: "予期せぬエラーが発生しました"
-    end
+      @order.postage = 800
   end
 
   private
   def order_params
-    params.require(:order).permit(:payment_method, :postal_code, :name, :address, :customer_id, :status, :payment, :postage)
+    params.require(:order).permit(:payment_method, :postal_code, :name, :address, :customer_id, :is_order, :payment, :postage)
   end
 end

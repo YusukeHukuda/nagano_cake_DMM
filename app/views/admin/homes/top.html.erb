@@ -1,36 +1,31 @@
-<h2>注文履歴一覧</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>注文日時</th>
-      <th>購入者</th>
-      <th>注文個数</th>
-      <th>注文ステータス</th>
-    </tr>
-  </thead>
-  
-  <tbody>
-    <%= @orders.each do |order| %>
-
-      <tr>
-        <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
-        <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
-        <td><%= order.order_detail.amount %></td>
-        <td>
-          <% if order.status == 0 %>
-        　入金待ち
-        　<% elsif order.status == 1 %>
-        　入金確認
-        　<% elsif order.status == 2 %>
-        　製作中
-        　<% elsif order.status == 3 %>
-        　発送準備中
-        　<% elsif order.status == 4 %>
-        　発送済み
-        　<% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container col-12 mt-4">
+  <h1 class="text-center bg-light">注文履歴一覧</h1>
+  <div class="row my-5">
+    <div class="col-md-10 mx-auto">
+      <table class='table'>
+        <thead>
+          <tr>
+            <th class="col-md-3">購入日時</th>
+            <th class="col-md-3">購入者</th>
+            <th class="col-md-3">注文個数</th>
+            <th class="col-md-3">注文ステータス</th>
+          </tr>
+        </thead>
+        <tbody class="border-bottom border-Secondary">
+          <% @orders.each do |order| %>
+            <tr>
+              <td class="col-md-3">
+                <%= link_to admin_order_path(order.id) do %>
+                  <%= order.created_at.strftime('%Y/%m/%d %H:%M:%S') %></td>
+                <% end %>
+              <td class="col-md-3"><%= order.customer.last_name %><%= order.customer.first_name %></td>
+              <td class="col-md-3"><%= order.order_details_total(order) %></td>
+              <td class="col-md-3"><%= order.is_order_i18n %></td>
+            </tr>
+          <% end %>
+          <%= paginate @orders %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

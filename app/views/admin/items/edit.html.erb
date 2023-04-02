@@ -1,28 +1,47 @@
-<h2>商品編集</h2>
-<%= form_with model: [:admin, @item] do |f| %>
-<div>
-  <%= f.label :image, "商品画像" %>
-  <%= f.file_field :imege, accept: "image/*" %><br>
+<div class="container col-12 mt-4">
+  <h1 class="text-center bg-light">商品編集</h1>
+  <%= render "public/shared/error_messages", resource: @item %>
+  <div class="row mt-5 g-3 d-flex justify-content-center">
+    <%= form_with class: "col-md-8", model: @item, url: admin_item_path, method: :patch do |f| %>
 
-  <%= f.label :name, "商品名" %>
-  <%= f.text_field :name %><br>
+      <div class="row mb-3">
+        <%= f.label "商品画像", class: "col-md-3 col-form-label" %>
+        <%= f.file_field :image, class: "col-md-5 form-control-file image", accept: 'image/*' %>
+      </div>
 
-  <%= f.label :introduction, "商品説明" %>
-  <%= f.text_area :introduction %><br>
+      <div class="row mb-3">
+        <%= f.label "商品名", class: "col-md-3 col-form-label" %>
+        <%= f.text_field :name, class: "col-md-5 form-control item_name" %>
+      </div>
 
-  <%= f.label :genre_id, "ジャンル" %>
-  <%= f.collection_select :genre_id, @genres, :id, :name, {include_blank: '--選択してください--'} %><br>
+      <div class="row mb-3">
+        <%= f.label "商品説明", class: "col-md-3 col-form-label" %>
+        <%= f.text_area :introduction, class: "col-md-5 form-control item_introduction" %>
+      </div>
 
-  <%= f.label :price, "税抜き価格" %>
-  <%= f.text_field :price %>円<br>
+      <div class="row mb-3">
+        <%= f.label "ジャンル", class: "col-md-3 form-select" %>
+        <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %>
+      </div>
 
-  <%= f.label :is_active, "販売ステータス" %>
-  <%= f.radio_button :item, :true %>
-  <%= f.label :item, "販売中" %>
-  <%= f.radio_button :item, :false %>
-  <%= f.label :item, "販売停止中" %><br>
+      <div class="row mb-3">
+        <%= f.label "税抜価格", class: "col-md-3 col-form-label" %>
+        <%= f.text_field :price, class: "col-md-5 form-control item_name", type: "number" %>
+      </div>
 
-  <%= f.submit '変更を保存' %>
+      <div class="row mb-3">
+        <%= f.label "販売ステータス", class: "col-md-3 col-form-label" %>
+        <div class = "form-check">
+          <%= f.radio_button :is_active, :true %>
+          <%= f.label :is_active, "販売中" %>
+          <%= f.radio_button :is_active, :false %>
+          <%= f.label :is_active, "販売停止中" %>
+        </div>
+      </div>
 
-</div>
-<% end %>
+      <div class="row mb-3 justify-content-center">
+        <%= f.submit "変更を更新", class: "col-md-2 btn btn-success btn-lg" %>
+      </div>
+    </div>
+    <% end %>
+  </div>

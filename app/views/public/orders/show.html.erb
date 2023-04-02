@@ -23,7 +23,7 @@
             </tr>
             <tr>
               <td>ステータス</td>
-              <td><%= @order.status_i18n %></td>
+              <td><%= @order.is_order_i18n %></td>
             </tr>
           </table>
         </div>
@@ -56,12 +56,12 @@
                 <th>個数</th>
                 <th>小計</th>
               </tr>
-              <% @order.order_items.each do |order| %>
+              <% @order.order_item.each do |order| %>
                 <tr>
                   <td><%= order.item.name %></td>
-                  <td><%= order.price %></td>
+                  <td><%= order.price_tax %></td>
                   <td><%= order.amount %></td>
-                  <td><%= order.price * order.amount %></td>
+                  <td><%= order.price_tax * order.amount %></td>
                 </tr>
               <% end %>
             </thead>

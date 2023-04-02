@@ -1,32 +1,67 @@
-<h2><%= @customer.last_name + first_name %>さんの会員情報編集</h2>
-
-<p>会員ID<%= @customer.id %></p>
-
-<%= form_with model: [:admin, @customer] do |f| %>
-
-<div>
-  <%= f.label :last_name, :first_name, "氏名" %>
-  <%= f.text_field :last_name %>
-  <%= f.text_field :first_name %><br>
-
-  <%= f.label :last_name_kana, :first_name_kana, "フリガナ" %>
-  <%= f.text_field :last_name_kana %>
-  <%= f.text_field :first_name_kana %><br>
-
-  <%= f.label :postal_code, "郵便番号" %>
-  <%= f.text_field :postal_code %>
-  <%= f.label :address, "住所" %>
-  <%= f.text_field :address %>
-  <%= f.label :telephone_number, "電話番号" %>
-  <%= f.text_field :telephone_number %>
-  <%= f.label :email, "メールアドレス" %>
-  <%= f.text_field :email %>
-  <%= f.label :is_deleted, "会員ステータス" %>
-  <%= f.radio_button :customer, :false %>
-  <%= f.label :customer, "有効" %>
-  <%= f.radio_button :customer, :true %>
-  <%= f.label :customer, "退会" %>
-  <%= f.submit '変更を保存' %>
+<div class="container col-12 mt-4">
+  <h1 class="bg-light text-center"><%= @customer.last_name + @customer.first_name %>さんの会員情報編集</h1>
+  <%= render "public/shared/error_messages", resource: @customer %>
+  <%= form_with model: @customer, url: admin_customer_path, method: :patch do |f| %>
+    <div class="form-group">
+      <div class="row mt-4 offset-md-1">
+        <div class="col-lg-2">会員ID</div>
+        <div class="col-lg-3"><%= @customer.id %></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row offset-md-1">
+        <div class="col-lg-2"><%= f.label :last_name,"氏名" %></div>
+        <div class="col-lg-3"><%= f.text_field :last_name, autofocus: true, class: "form-control border-dark" %></div>
+        <div class="col-lg-3"><%= f.text_field :first_name, class: "form-control border-dark" %></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row offset-md-1">
+        <div class="col-lg-2"><%= f.label :last_name_kana,"フリガナ" %></div>
+        <div class="col-lg-3"><%= f.text_field :last_name_kana, class: "form-control border-dark" %></div>
+        <div class="col-lg-3"><%= f.text_field :first_name_kana, class: "form-control border-dark" %></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row offset-md-1">
+        <div class="col-lg-2"><%= f.label :postal_code,"郵便番号" %></div>
+        <div class="col-lg-3"><%= f.text_field :postal_code, class: "form-control border-dark" %></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row offset-md-1">
+        <div class="col-lg-2"><%= f.label :address,"住所" %></div>
+        <div class="col-lg-7"><%= f.text_field :address,class: "form-control border-dark" %></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row offset-md-1">
+        <div class="col-lg-2"><%= f.label :telephone_number,"電話番号" %></div>
+        <div class="col-lg-3"><%= f.text_field :telephone_number, class: "form-control border-dark" %></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row offset-md-1">
+        <div class="col-lg-2"><%= f.label :email,"メールアドレス" %></div>
+        <div class="col-lg-3"><%= f.text_field :email, class: "form-control border-dark" %></div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row offset-md-1">
+        <div class="col-lg-2"><%= f.label :is_deleted,"会員ステータス" %></div>
+        <div class="col-lg-3">
+          <%= f.radio_button :is_deleted, :false, checked: true %>
+          <%= f.label :is_deleted, "有効", value: false %>
+          　<%= f.radio_button :is_deleted, :true %>
+          <%= f.label :is_deleted, "退会", value: true %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row offset-md-1">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-3 text-center"><%= f.submit "変更を保存", style: 'width:150px', class: "btn btn-outline-success" %></div>
+      </div>
+    </div>
+  <% end %>
 </div>
-
-<% end %>

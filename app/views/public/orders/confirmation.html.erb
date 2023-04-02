@@ -60,7 +60,7 @@
         <%= form_with model: @order, url: thanks_path, method: :post do |f| %>
           <%= f.hidden_field :customer_id %>
           <%= f.hidden_field :postage %>
-          <%= f.hidden_field :status %>
+          <%= f.hidden_field :is_order %>
           <%= f.hidden_field :postal_code %>
           <%= f.hidden_field :address %>
           <%= f.hidden_field :name %>

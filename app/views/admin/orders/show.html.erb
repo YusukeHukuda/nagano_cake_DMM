@@ -1,0 +1,80 @@
+<div class="container mt-4 col-12">
+  <h1 class="text-center bg-light">注文履歴詳細</h1>
+  <div class="mt-5">
+    <table class="table table-borderless offset-1">
+      <tr>
+        <th class="col-2 pl-4">購入者</th>
+        <td><%= @order.customer.last_name %><%= @order.customer.first_name %></td>
+      </tr>
+      <tr>
+        <th class="col-2 pl-4">注文日</th>
+        <td><%= @order.created_at.to_s(:datetime_jp) %></td>
+      </tr>
+      <tr>
+        <th class="col-2 pl-4">配送先</th>
+        <td>
+          〒<%= @order.postal_code %> <%= @order.address %><br>
+          <%= @order.name %>
+        </td>
+      </tr>
+      <tr>
+        <th class="col-2 pl-4">注文ステータス</th>
+        <td>
+          <%= form_with model: @order, url: admin_order_path(@order), method: :patch do |f| %>
+            <%= f.select :is_order, Order.is_orders_i18n.invert %>
+            <%= f.submit '更新', class: "btn btn-success btn-sm" %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+
+    <div class="row offset-1">
+      <div class="col-9">
+        <table class="table mt-4">
+          <thead class="table-light">
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th>制作ステータス</th>
+          </thead>
+          <tbody>
+            <% @order.order_item.each do |order_item| %>
+              <tr>
+                <td><%= order_item.item.name %></td>
+                <td><%= order_item.price_tax %></td>
+                <td><%= order_item.amount %></td>
+                <td><%= order_item.price_tax * order_item.amount %></td>
+                <td>
+                  <%= form_with model: order_item, url: admin_order_order_item_path(@order.id,order_item.id), method: :patch do |f| %>
+                    <%= f.select :is_production, OrderItem.is_productions_i18n.invert %>
+                    <%= f.submit '変更', class: "btn btn-success btn-sm" %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-3 d-flex align-items-end">
+        <table>
+          <tr>
+            <th>商品合計</th>
+            <td><%= @order.payment %></td>
+          </tr>
+          <tr>
+            <th>送料</th>
+            <td><%= @order.postage %></td>
+          </tr>
+          <tr>
+            <th>請求金額合計</th>
+            <td><%= @order.payment + @order.postage %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <%= link_to "注文履歴一覧に戻る", admin_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
