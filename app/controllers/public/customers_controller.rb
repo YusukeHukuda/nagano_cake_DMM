@@ -20,7 +20,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def unsubscribe
-
+    @customer = current_customer
   end
 
   def withdraw
@@ -28,7 +28,9 @@ class Public::CustomersController < ApplicationController
     @customer.is_deleted = true
     @customer.save
     reset_session
+
     redirect_to root_path
+    flash[:notice] = "退会処理を実行いたしました"
   end
 
 private

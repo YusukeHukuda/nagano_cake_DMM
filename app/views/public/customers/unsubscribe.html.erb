@@ -19,7 +19,7 @@
     <div class="col-lg-3 mt-4 text-center">
       <%= form_with model: @customer, url: customers_withdraw_path, method: :patch do |f| %>
         <%= f.hidden_field :is_deleted, :value => "true" %>
-        <%= f.submit "退会する", style: 'width:150px', class: 'btn btn-danger' %>
+        <%= f.submit "退会する", style: 'width:150px', class: 'btn btn-danger', data: { confirm: "本当の本当に退会しますか？"} %>
       <% end %>
     </div>
     <div class="col-lg-3"></div>

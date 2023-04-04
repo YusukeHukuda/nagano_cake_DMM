@@ -25,6 +25,15 @@ class Public::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
+  def after_sign_in_path_for(resource)
+    flash[:youkoso] = "ようこそ、#{ current_customer.full_name } さん！"
+    customers_path
+  end
+
+  def after_sign_out_path_for(resource)
+    root_path
+  end
+
   def customer_state
     @customer = Customer.find_by(email: params[:customer][:email])
     return if !@customer

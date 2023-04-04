@@ -1,0 +1,2 @@
+      invoke  active_record
+      create    db/migrate/20230402165445_add_is_production_to_model.rb

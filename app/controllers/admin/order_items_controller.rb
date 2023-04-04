@@ -13,7 +13,7 @@ class Admin::OrderItemsController < ApplicationController
           is_updated = false
         end
       end
-      @order.update(is_production: 3) if is_updated
+      @order.update(is_order: 3) if is_updated
     end
     redirect_to admin_order_path(@order)
   end
